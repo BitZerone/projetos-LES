@@ -1,0 +1,35 @@
+<!-- 
+Implemente um script JavaScript que solicite ao usuário um número inteiro
+positivo. Assim que o usuário digitar um valor válido calcule o fatorial do
+mesmo e exiba o resultado em uma janela de alerta
+ -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 4</title>
+</head>
+<body>
+    <script>
+        function Fatorial(numero) {
+            var fatNum = numero;
+            if (numero > 1) {
+                numero = numero - 1;
+                fatNum = fatNum * Fatorial(numero);
+            }
+            return fatNum;
+        }
+
+        var numero = prompt("Digite um número inteiro positivo: ");
+        while (isNaN(parseInt(numero))) {
+            numero = prompt(`${numero} não é um número inteiro positivo: `);
+        }
+        
+        alert(Fatorial(numero));
+        
+        window.location.href = "semana1.html";
+    </script>
+</body>
+</html>
