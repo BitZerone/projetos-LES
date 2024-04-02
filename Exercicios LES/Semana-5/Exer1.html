@@ -63,38 +63,9 @@
     </style>
 </head>
 <body>
-    <img src="img/reset.png" class="reset" onclick="Resetar()">
-    <div class="main">
-        <h1>Total</h1>
-        <span class="resp" id="totalPessoas">0</span>
-        <div class="Pessoas" style="margin: 50px 0;">
-            <div class="divHoMu" style="margin-right: 100px;">
-                <img src="img/homem.png" alt="" style="height: 200px;">
-                <div class="divMaisMenos">
-                    <img src="img/+.jpg" onclick="Incrementa('H')" class="efeito">
-                    <img src="img/-.jpg" onclick="Decrementa('H')" class="efeito">
-                </div>
-            </div>
-            <div class="divHoMu">
-                <img src="img/mulher.png" alt="" style="height: 200px;">
-                <div class="divMaisMenos">
-                    <img src="img/+.jpg" onclick="Incrementa('M')" class="efeito">
-                    <img src="img/-.jpg" onclick="Decrementa('M')" class="efeito">
-                </div>
-            </div>
-        </div>
-        <div class="Pessoas">
-            <div class="divHoMu" style="margin-right: 120px;">
-                <h3 style="margin: 0 auto;">Homens</h3>
-                <span class="resp" id="homemResp">0</span>
-            </div>
-            <div class="divHoMu">
-                <h3 style="margin: 0 auto;">Mulheres</h3>
-                <span class="resp" id="mulherResp">0</span>
-            </div>
-        </div>
-    </div>
+    <div class="main" id="main"></div>
     <script>
+        document.getElementById("main").innerHTML = '<img src="img/reset.png" class="reset" onclick="Resetar()"><h1>Total</h1><span class="resp" id="totalPessoas">0</span><div class="Pessoas" style="margin: 50px 0;"><div class="divHoMu" style="margin-right: 100px;"><img src="img/homem.png" alt="" style="height: 200px;"><div class="divMaisMenos"><img src="img/+.jpg" onclick="Incrementa(\'H\')" class="efeito"><img src="img/-.jpg" onclick="Decrementa(\'H\')" class="efeito"></div></div><div class="divHoMu"><img src="img/mulher.png" alt="" style="height: 200px;"><div class="divMaisMenos"><img src="img/+.jpg" onclick="Incrementa(\'M\')" class="efeito"><img src="img/-.jpg" onclick="Decrementa(\'M\')" class="efeito"></div></div></div><div class="Pessoas"><div class="divHoMu" style="margin-right: 120px;"><h3 style="margin: 0 auto;">Homens</h3><span class="resp" id="homemResp">0</span></div><div class="divHoMu"><h3 style="margin: 0 auto;">Mulheres</h3><span class="resp" id="mulherResp">0</span></div></div>';
         function Incrementa(gen){
             if (gen == "H"){
                 var result = parseInt(document.getElementById("homemResp").textContent);
