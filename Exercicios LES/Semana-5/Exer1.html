@@ -49,9 +49,21 @@
             margin-top: 5px;
             height: 65px;
         }
+        .reset{
+            position: fixed;
+            height: 30px;
+            top: 50px;
+            right: 50px;
+            
+        }
+        .reset:hover{
+            transition: 0.5s;
+            rotate: 360deg;
+        }
     </style>
 </head>
 <body>
+    <img src="img/reset.png" class="reset" onclick="Resetar()">
     <div class="main">
         <h1>Total</h1>
         <span class="resp" id="totalPessoas">0</span>
@@ -111,6 +123,12 @@
             var result = parseInt(document.getElementById("totalPessoas").textContent);
             var result = result - 1;
             document.getElementById("totalPessoas").textContent = result;
+        }
+
+        function Resetar(){
+            document.getElementById("homemResp").textContent = 0;
+            document.getElementById("mulherResp").textContent = 0;
+            document.getElementById("totalPessoas").textContent = 0;
         }
     </script>
 </body>
