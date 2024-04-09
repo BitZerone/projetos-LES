@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://www.unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        function MeuElemento(){
+            return (
+                <div>
+                    <h1 style={{fontFamily: 'Arial, Helvetica, sans-serif'}}>{fraseIncompleta}</h1>
+                </div>
+            )
+        }
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+
+        const fraseCompleta = "Venha estudar na Fatec";
+        var fraseIncompleta = "";
+        var contador = 0;
+
+        function tick(){
+            if(fraseCompleta[contador] != null){
+                fraseIncompleta = fraseIncompleta + fraseCompleta[contador];
+                contador += 1;
+            }
+            root.render(<MeuElemento />);
+        }
+        setInterval(tick,100);
+    </script>
+</body>
+</html>
