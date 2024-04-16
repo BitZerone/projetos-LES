@@ -65,41 +65,137 @@
 <body>
     <div class="main" id="main"></div>
     <script>
-        document.getElementById("main").innerHTML = '<img src="img/reset.png" class="reset" onclick="Resetar()"><h1>Total</h1><span class="resp" id="totalPessoas">0</span><div class="Pessoas" style="margin: 50px 0;"><div class="divHoMu" style="margin-right: 100px;"><img src="img/homem.png" alt="" style="height: 200px;"><div class="divMaisMenos"><img src="img/+.jpg" onclick="Incrementa(\'H\')" class="efeito"><img src="img/-.jpg" onclick="Decrementa(\'H\')" class="efeito"></div></div><div class="divHoMu"><img src="img/mulher.png" alt="" style="height: 200px;"><div class="divMaisMenos"><img src="img/+.jpg" onclick="Incrementa(\'M\')" class="efeito"><img src="img/-.jpg" onclick="Decrementa(\'M\')" class="efeito"></div></div></div><div class="Pessoas"><div class="divHoMu" style="margin-right: 120px;"><h3 style="margin: 0 auto;">Homens</h3><span class="resp" id="homemResp">0</span></div><div class="divHoMu"><h3 style="margin: 0 auto;">Mulheres</h3><span class="resp" id="mulherResp">0</span></div></div>';
+        const mainDiv = document.getElementById('main');
+
+        const resetButton = document.createElement('img');
+        resetButton.src = 'img/reset.png';
+        resetButton.classList.add('reset');
+        resetButton.addEventListener('click', Resetar);
+        mainDiv.appendChild(resetButton);
+
+        const title = document.createElement('h1');
+        title.textContent = 'Total';
+        mainDiv.appendChild(title);
+
+        const totalSpan = document.createElement('span');
+        totalSpan.classList.add('resp');
+        totalSpan.id = 'totalPessoas';
+        totalSpan.textContent = '0';
+        mainDiv.appendChild(totalSpan);
+
+        const pessoasDiv = document.createElement('div');
+        pessoasDiv.classList.add('Pessoas');
+        pessoasDiv.style.margin = '50px 0';
+        mainDiv.appendChild(pessoasDiv);
+
+        const homemDiv = document.createElement('div');
+        homemDiv.classList.add('divHoMu');
+        homemDiv.style.marginRight = '100px';
+        pessoasDiv.appendChild(homemDiv);
+
+        const homemImg = document.createElement('img');
+        homemImg.src = 'img/homem.png';
+        homemImg.alt = 'Homem';
+        homemImg.style.height = '200px';
+        homemDiv.appendChild(homemImg);
+
+        const homemMaisMenosDiv = document.createElement('div');
+        homemMaisMenosDiv.classList.add('divMaisMenos');
+        homemDiv.appendChild(homemMaisMenosDiv);
+
+        const homemMaisImg = document.createElement('img');
+        homemMaisImg.src = 'img/+.jpg';
+        homemMaisImg.classList.add('efeito');
+        homemMaisImg.addEventListener('click', () => Incrementa('H'));
+        homemMaisMenosDiv.appendChild(homemMaisImg);
+
+        const homemMenosImg = document.createElement('img');
+        homemMenosImg.src = 'img/-.jpg';
+        homemMenosImg.classList.add('efeito');
+        homemMenosImg.addEventListener('click', () => Decrementa('H'));
+        homemMaisMenosDiv.appendChild(homemMenosImg);
+
+        const mulherDiv = document.createElement('div');
+        mulherDiv.classList.add('divHoMu');
+        pessoasDiv.appendChild(mulherDiv);
+
+        const mulherImg = document.createElement('img');
+        mulherImg.src = 'img/mulher.png';
+        mulherImg.alt = 'Mulher';
+        mulherImg.style.height = '200px';
+        mulherDiv.appendChild(mulherImg);
+
+        const mulherMaisMenosDiv = document.createElement('div');
+        mulherMaisMenosDiv.classList.add('divMaisMenos');
+        mulherDiv.appendChild(mulherMaisMenosDiv);
+
+        const mulherMaisImg = document.createElement('img');
+        mulherMaisImg.src = 'img/+.jpg';
+        mulherMaisImg.classList.add('efeito');
+        mulherMaisImg.addEventListener('click', () => Incrementa('M'));
+        mulherMaisMenosDiv.appendChild(mulherMaisImg);
+
+        const mulherMenosImg = document.createElement('img');
+        mulherMenosImg.src = 'img/-.jpg';
+        mulherMenosImg.classList.add('efeito');
+        mulherMenosImg.addEventListener('click', () => Decrementa('M'));
+        mulherMaisMenosDiv.appendChild(mulherMenosImg);
+
+        const divRespsDiv = document.createElement('div');
+        divRespsDiv.classList.add('divResps');
+        mainDiv.appendChild(divRespsDiv);
+
+        const homemRespDiv = document.createElement('div');
+        homemRespDiv.classList.add('divHoMu');
+        homemRespDiv.style.marginRight = '120px';
+        divRespsDiv.appendChild(homemRespDiv);
+
+        const homemRespTitle = document.createElement('h3');
+        homemRespTitle.textContent = 'Homens';
+        homemRespTitle.style.margin = '0 auto';
+        homemRespDiv.appendChild(homemRespTitle);
+
+        const homemRespSpan = document.createElement('span');
+        homemRespSpan.classList.add('resp');
+        homemRespSpan.id = 'homemResp';
+        homemRespSpan.textContent = '0';
+        homemRespDiv.appendChild(homemRespSpan);
+
+        const mulherRespDiv = document.createElement('div');
+        mulherRespDiv.classList.add('divHoMu');
+        divRespsDiv.appendChild(mulherRespDiv);
+
+        const mulherRespTitle = document.createElement('h3');
+        mulherRespTitle.textContent = 'Mulheres';
+        mulherRespTitle.style.margin = '0 auto';
+        mulherRespDiv.appendChild(mulherRespTitle);
+
+        const mulherRespSpan = document.createElement('span');
+        mulherRespSpan.classList.add('resp');
+        mulherRespSpan.id = 'mulherResp';
+        mulherRespSpan.textContent = '0';
+        mulherRespDiv.appendChild(mulherRespSpan);
+
         function Incrementa(gen){
-            if (gen == "H"){
-                var result = parseInt(document.getElementById("homemResp").textContent);
-                var result = result + 1;
-                document.getElementById("homemResp").textContent = result;
-            } else {
-                var result = parseInt(document.getElementById("mulherResp").textContent);
-                var result = result + 1;
-                document.getElementById("mulherResp").textContent = result;
-            }
-            var result = parseInt(document.getElementById("totalPessoas").textContent);
-            var result = result + 1;
-            document.getElementById("totalPessoas").textContent = result;
+            const genResp = gen === 'H' ? 'homemResp' : 'mulherResp';
+            const totalSpan = document.getElementById('totalPessoas');
+            const genValue = parseInt(document.getElementById(genResp).textContent) + 1;
+            document.getElementById(genResp).textContent = genValue;
+            totalSpan.textContent = parseInt(totalSpan.textContent) + 1;
         }
 
         function Decrementa(gen){
-            if (gen == "H"){
-                var result = parseInt(document.getElementById("homemResp").textContent);
-                var result = result - 1;
-                document.getElementById("homemResp").textContent = result;
-            } else {
-                var result = parseInt(document.getElementById("mulherResp").textContent);
-                var result = result - 1;
-                document.getElementById("mulherResp").textContent = result;
-            }
-            var result = parseInt(document.getElementById("totalPessoas").textContent);
-            var result = result - 1;
-            document.getElementById("totalPessoas").textContent = result;
+            const genResp = gen === 'H' ? 'homemResp' : 'mulherResp';
+            const totalSpan = document.getElementById('totalPessoas');
+            const genValue = parseInt(document.getElementById(genResp).textContent) - 1;
+            document.getElementById(genResp).textContent = genValue;
+            totalSpan.textContent = parseInt(totalSpan.textContent) - 1;
         }
 
         function Resetar(){
-            document.getElementById("homemResp").textContent = 0;
-            document.getElementById("mulherResp").textContent = 0;
-            document.getElementById("totalPessoas").textContent = 0;
+            document.getElementById('homemResp').textContent = '0';
+            document.getElementById('mulherResp').textContent = '0';
+            document.getElementById('totalPessoas').textContent = '0';
         }
     </script>
 </body>
