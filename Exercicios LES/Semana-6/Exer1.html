@@ -78,32 +78,73 @@
 <body>
     <div id="main"></div>
     <script>
-        document.getElementById('main').innerHTML = '<div class="resp" id="resp"></div><div class="row"><div class="cinza" onclick="reset();">AC</div><div class="cinza" onclick="inverter();">+/-</div><div class="cinza" onclick="inserirVal(\'%\');">%</div><div class="laranja" onclick="inserirVal(\'÷\');">÷</div></div><div class="row"><div class="cinza-claro" onclick="inserirVal(7);">7</div><div class="cinza-claro" onclick="inserirVal(8);">8</div><div class="cinza-claro" onclick="inserirVal(9);">9</div><div class="laranja" onclick="inserirVal(\'x\');">×</div></div><div class="row"><div class="cinza-claro" onclick="inserirVal(4);">4</div><div class="cinza-claro" onclick="inserirVal(5);">5</div><div class="cinza-claro" onclick="inserirVal(6);">6</div><div class="laranja" onclick="inserirVal(\'-\');">-</div></div><div class="row"><div class="cinza-claro" onclick="inserirVal(1);">1</div><div class="cinza-claro" onclick="inserirVal(2);">2</div><div class="cinza-claro" onclick="inserirVal(3);">3</div><div class="laranja" onclick="inserirVal(\'+\');">+</div></div><div class="row"><div class="cinza-claro" style="width: 45%; border-radius: 50px" onclick="inserirVal(0);">0</div><div class="cinza-claro" onclick="inserirVal(\',\');">,</div><div class="laranja" onclick="calcular();">=</div></div>';
+        const mainDiv = document.getElementById('main');
+
+        const respDiv = document.createElement('div');
+        respDiv.classList.add('resp');
+        respDiv.setAttribute('id', 'resp');
+        mainDiv.appendChild(respDiv);
+
+        const buttonsLayout = [
+            ['AC', '+/-', '%', '÷'],
+            [7, 8, 9, 'x'],
+            [4, 5, 6, '-'],
+            [1, 2, 3, '+'],
+            [0, ',', '=']
+        ];
+
+        buttonsLayout.forEach(rowData => {
+            const rowDiv = document.createElement('div');
+            rowDiv.classList.add('row');
+            mainDiv.appendChild(rowDiv);
+
+            rowData.forEach(buttonData => {
+                const buttonDiv = document.createElement('div');
+                if(buttonData === '=' || buttonData === '+' || buttonData === '-' || buttonData === 'x' || buttonData === '÷'){
+                    buttonDiv.classList.add('laranja');
+                } else if(buttonData === 'AC' || buttonData === '+/-' || buttonData === '%'){
+                    buttonDiv.classList.add('cinza');
+                }else{
+                    buttonDiv.classList.add('cinza-claro');
+                }
+                if (buttonData == 0){
+                    buttonDiv.style.width = '45%';
+                    buttonDiv.style.borderRadius = '50px';
+                }
+                buttonDiv.textContent = buttonData;
+                buttonDiv.addEventListener('click', () => {
+                    if (buttonData === 'AC') reset();
+                    else if (buttonData === '+/-') inverter();
+                    else if (buttonData === '=') calcular();
+                    else inserirVal(buttonData);
+                });
+                rowDiv.appendChild(buttonDiv);
+            });
+        });
 
         function inserirVal(valor){
-            var visor = document.getElementById('resp');
-            visor.innerText = visor.innerText + valor.toString();
+            const visor = document.getElementById('resp');
+            visor.textContent += valor.toString();
         }
         
         function reset(){
-            document.getElementById('resp').innerText = "";
+            document.getElementById('resp').textContent = "";
         }
 
         function calcular(){
-            var visor = document.getElementById('resp');
-            formatado = visor.innerText.replace(',','.');
-            formatado = formatado.replace('%','*0.01');
-            formatado = formatado.replace('x','*');
-            formatado = formatado.replace('÷','/');
-            resposta = eval(formatado).toString();
-            visor.innerText = resposta.replace('.',',');
+            const visor = document.getElementById('resp');
+            let formatado = visor.textContent.replace(',', '.');
+            formatado = formatado.replace('%', '*0.01');
+            formatado = formatado.replace('x', '*');
+            formatado = formatado.replace('÷', '/');
+            const resposta = eval(formatado).toString();
+            visor.textContent = resposta.replace('.', ',');
         }
 
         function inverter(){
-            var visor = document.getElementById('resp');
-            visor.innerText = "-1x(" + visor.innerText + ")";
+            const visor = document.getElementById('resp');
+            visor.textContent = "-1*(" + visor.textContent + ")";
         }
-
     </script>
 </body>
 </html>
